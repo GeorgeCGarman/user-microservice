@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const dotenv = require("dotenv")
 const middleware = require('./middleware/index');
-
+const profileRouter = require("./routes/profileRoutes")
 const userRouter = require("./routes/userRoutes")
 const ideaRouter = require("./routes/ideaRoutes")
 
@@ -12,7 +12,7 @@ dotenv.config()
 //use this for Production
 // const mongoURL = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`
 //local
-// MONGO_URL=`mongodb://localhost:27017/dbname`
+MONGO_URL=`mongodb://localhost:27017/testdb`
 const mongoURL = process.env.MONGO_URL
 const connectWithRetry = () =>{
 mongoose
@@ -31,8 +31,9 @@ app.use(express.json())
 //Middleware
 // app.use(middleware.decodeToken);
 
-app.use("/user", userRouter)
-app.use("/ideabrekrr", ideaRouter)
+// app.use("/onboarding", profileRouter)
+// app.use("/user", userRouter)
+// app.use("/ideabrekrr", ideaRouter)
 
 
 const port = process.env.PORT || 3000;
