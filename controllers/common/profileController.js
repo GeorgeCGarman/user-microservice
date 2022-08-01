@@ -40,6 +40,7 @@ const getProfile = async(req, res) => {
 const updateProfile = async(req, res) => {
   try{
     const profile = Profile.findByIdAndUpdate({_id: req.body._id}, req.body)
+    if (!profile) return res.status(404).json({status: "fail", msg: "User not found"})
     res.status(200).json({status: "success", msg: "Update user successfully"})
 
   } catch (e) {
@@ -54,6 +55,7 @@ const updateProfile = async(req, res) => {
 const deleteProfile = async(req, res) => {
   try{
     const profile = Profile.findByIdAndDelete({_id: req.body._id})
+    if (!profile) return res.status(404).json({status: "fail", msg: "User not found"})
     res.status(200).json({status: "success", msg: "Deleted profile successfully"})
   } catch (e) {
     // console.log("Error from route: "+e)
