@@ -13,7 +13,7 @@ dotenv.config()
 // const mongoURL = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`
 //local
 MONGO_URL=`mongodb://localhost:27017/testdb`
-const mongoURL = process.env.MONGO_URL
+const mongoURL = MONGO_URL
 const connectWithRetry = () =>{
 mongoose
     .connect(mongoURL)
@@ -31,7 +31,7 @@ app.use(express.json())
 //Middleware
 // app.use(middleware.decodeToken);
 
-// app.use("/onboarding", profileRouter)
+app.use("/onboarding", profileRouter)
 // app.use("/user", userRouter)
 // app.use("/ideabrekrr", ideaRouter)
 

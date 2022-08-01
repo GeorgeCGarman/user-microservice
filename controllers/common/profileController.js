@@ -5,7 +5,12 @@ const registerProfile = async(req, res) => {
     const { name, birthday, roll } = req.body
     const duplicate = await Profile.findOne({name: name})
     if (duplicate) return res.status(400).json({status:"fail", msg: "Profile already exists"})
-    Profile.save()
+    const profile = new Profile({
+      birthday: birthday,
+      roll: roll
+    })
+    profile.name = name
+    profile.save()
     res.status(201).json({status:"success", msg: "Successfully registered new profile"})
 
   } catch (e) {
