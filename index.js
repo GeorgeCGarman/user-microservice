@@ -4,10 +4,14 @@ const cors = require('cors')
 const dotenv = require("dotenv")
 const middleware = require('./middleware/index');
 const profileRouter = require("./routes/profileRoutes")
-const userRouter = require("./routes/userRoutes")
-const ideaRouter = require("./routes/ideaRoutes")
 
 const app = express()
+// Use this?
+// app.use(
+//     express.urlencoded({
+//       extended: true,
+//     })
+//   );
 dotenv.config()
 //use this for Production
 // const mongoURL = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`

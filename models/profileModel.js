@@ -6,19 +6,14 @@ const profileSchema = new mongoose.Schema({
     last: String
   },
   birthday: String,
-  roll: String
-}, {
-  virtuals: {
-    fullName: {
-      get() {
-        return this.name.first + " " + this.name.last
-      },
-      set(v) {
-        this.name.first = v.substr(0, v.indexOf(' '))
-        this.name.last = v.substr(v.indexOf(' ') + 1)
-      }
-    }
-  }
+  role: String
+})
+
+profileSchema.virtual('fullName').
+get(function() {return this.name.first + " " + this.name.last}).
+set(function(v) {
+  this.name.first = v.substr(0, v.indexOf(' '))
+  this.name.last = v.substr(v.indexOf(' ') + 1)
 })
 
 const Profile = mongoose.model("Profile", profileSchema)
