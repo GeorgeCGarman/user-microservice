@@ -1,4 +1,4 @@
-const Profile = require("../../models/profileModel")
+const Profile = require("../models/profileModel")
 
 const registerProfile = async(req, res) => {
   try{
