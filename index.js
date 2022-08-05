@@ -4,6 +4,8 @@ const cors = require('cors')
 const dotenv = require("dotenv")
 const middleware = require('./middleware/index');
 const profileRouter = require("./routes/profileRoutes")
+const ratingRouter = require("./routes/ratingRoutes")
+
 
 const app = express()
 // Use this?
@@ -36,13 +38,14 @@ app.use(express.json())
 // app.use(middleware.decodeToken);
 
 app.use("/onboarding", profileRouter)
+app.use("/rating", ratingRouter)
 // app.use("/user", userRouter)
 // app.use("/ideabrekrr", ideaRouter)
 
 
 const port = process.env.PORT || 3000;
 
-app.listen(port, ()=> console.log(`Listening on port ${port}`))
+app.listen(port, () => console.log(`Listening on port ${port}`))
 
 
 //Todo:

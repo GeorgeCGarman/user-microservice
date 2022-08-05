@@ -6,7 +6,8 @@ const profileSchema = new mongoose.Schema({
     last: String
   },
   birthday: String,
-  role: String
+  role: String,
+  mode: Boolean
 })
 
 profileSchema.virtual('fullName').

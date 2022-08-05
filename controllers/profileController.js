@@ -12,7 +12,8 @@ const registerProfile = async(req, res) => {
     if (duplicate) return res.status(400).json({status:"fail", msg: "Profile already exists"})
     const profile = new Profile({
       birthday: birthday,
-      role: role
+      role: role,
+      mode: true
     })
     profile.name = name
     await profile.save()
@@ -59,7 +60,7 @@ const updateProfile = async(req, res) => {
 
 const deleteProfile = async(req, res) => {
   try{
-    const profile = await Profile.findByIdAndDelete({_id: req.body._id})
+    const profile = await Profile.findByIdAndUpdate({_id: req.body._id}, {mode: false})
     if (!profile) return res.status(404).json({status: "fail", msg: "Profile not found"})
     res.status(200).json({status: "success", msg: "Deleted profile successfully"})
   } catch (e) {

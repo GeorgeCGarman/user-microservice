@@ -28,8 +28,9 @@ const createRating = async(req, res) => {
 const getRating = async(req, res) => {
   try{
     const {user_id, target_id} = req.body
+    console.log(user_id)
     const rating = await Rating.findOne({user_id: user_id, target_id: target_id})
-    if (!rating) return res.status(404).json({status: "fail", msg: "Profile not found"})
+    if (!rating) return res.status(404).json({status: "fail", msg: "Rating not found"})
     return res.status(200).json(rating)
   } catch (e) {
     console.log("Error from route: "+e)
@@ -42,9 +43,9 @@ const getRating = async(req, res) => {
 
 const updateRating = async(req, res) => {
   try{
-    const rating = await Rating.findByIdAndUpdate({user_id: user_id, target_id: target_id}, req.body) // *
-    if (!rating) return res.status(404).json({status: "fail", msg: "Profile not found"})
-    res.status(200).json({status: "success", msg: "Update user successfully"})
+    const rating = await Rating.updateOne({user_id: user_id, target_id: target_id}, req.body) // *
+    if (!rating) return res.status(404).json({status: "fail", msg: "Rating not found"})
+    res.status(200).json({status: "success", msg: "Update rating successfully"})
 
   } catch (e) {
     console.log("Error from route: "+e)
@@ -57,9 +58,9 @@ const updateRating = async(req, res) => {
 
 const deleteRating = async(req, res) => {
   try{
-    const profile = await Profile.findByIdAndDelete({_id: req.body._id})
-    if (!profile) return res.status(404).json({status: "fail", msg: "Profile not found"})
-    res.status(200).json({status: "success", msg: "Deleted profile successfully"})
+    const profile = await Profile.deleteOne({_id: req.body._id})
+    if (!profile) return res.status(404).json({status: "fail", msg: "Rating not found"})
+    res.status(200).json({status: "success", msg: "Deleted rating successfully"})
   } catch (e) {
     console.log("Error from route: "+e)
     res.status(500).json({
@@ -69,4 +70,4 @@ const deleteRating = async(req, res) => {
   }
 }
 
-module.exports = { registerProfile, getProfile, updateProfile, deleteProfile }
+module.exports = { createRating, getRating, updateRating, deleteRating }

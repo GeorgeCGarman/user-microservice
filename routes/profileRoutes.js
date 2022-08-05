@@ -1,5 +1,5 @@
 const express = require("express")
-const { registerProfile, getProfile, updateProfile, deleteProfile } = require("../controllers/common/profileController")
+const { registerProfile, getProfile, updateProfile, deleteProfile } = require("../controllers/profileController")
 const router = express.Router()
 
 router.get("/profile", getProfile)
