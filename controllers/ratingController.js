@@ -4,7 +4,7 @@ const createRating = async(req, res) => {
   try{
     console.log(req.body)
     const { user_id, target_id, stars, comment } = req.body
-    const duplicate = await Profile.findOne({user_id: user_id, target_id: target_id})
+    const duplicate = await Rating.findOne({user_id: user_id, target_id: target_id})
     console.log(duplicate)
     if (duplicate) return res.status(400).json({status:"fail", msg: "Rating already exists"})
     const rating = new Rating({
@@ -43,6 +43,7 @@ const getRating = async(req, res) => {
 
 const updateRating = async(req, res) => {
   try{
+    const {user_id, target_id} = req.body
     const rating = await Rating.updateOne({user_id: user_id, target_id: target_id}, req.body) // *
     if (!rating) return res.status(404).json({status: "fail", msg: "Rating not found"})
     res.status(200).json({status: "success", msg: "Update rating successfully"})
@@ -58,8 +59,8 @@ const updateRating = async(req, res) => {
 
 const deleteRating = async(req, res) => {
   try{
-    const profile = await Profile.deleteOne({_id: req.body._id})
-    if (!profile) return res.status(404).json({status: "fail", msg: "Rating not found"})
+    const rating = await Rating.deleteOne({_id: req.body._id})
+    if (!rating) return res.status(404).json({status: "fail", msg: "Rating not found"})
     res.status(200).json({status: "success", msg: "Deleted rating successfully"})
   } catch (e) {
     console.log("Error from route: "+e)
