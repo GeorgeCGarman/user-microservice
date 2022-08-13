@@ -5,7 +5,7 @@ const dotenv = require("dotenv")
 const middleware = require('./middleware/index');
 const profileRouter = require("./routes/profileRoutes")
 const ratingRouter = require("./routes/ratingRoutes")
-
+const complaintRouter = require("./routes/complaintRoutes")
 
 const app = express()
 // Use this?
@@ -39,8 +39,7 @@ app.use(express.json())
 
 app.use("/onboarding", profileRouter)
 app.use("/rating", ratingRouter)
-// app.use("/user", userRouter)
-// app.use("/ideabrekrr", ideaRouter)
+app.use("/complaints", complaintRouter)
 
 
 const port = process.env.PORT || 3000;

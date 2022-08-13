@@ -2,12 +2,7 @@ const Profile = require("../models/profileModel")
 
 const registerProfile = async(req, res) => {
   try{
-    console.log(req.body)
-    const { name: fullName, birthday, role } = req.body
-    const name = {first: "", last: ""}
-    name.first = fullName.substr(0, fullName.indexOf(' '))
-    name.last = fullName.substr(fullName.indexOf(' ') + 1)
-    const duplicate = await Profile.findOne({name: name}) // *
+    const duplicate = await Profile.findOne({name: fullNameToName(req.body.name)}) // *
     console.log(duplicate)
     if (duplicate) return res.status(400).json({status:"fail", msg: "Profile already exists"})
     const profile = new Profile({
@@ -70,6 +65,13 @@ const deleteProfile = async(req, res) => {
         msg:"Internal Server Error"
     })
   }
+}
+
+function fullNameToName(fullName) {
+  const name = {first: "", last: ""}
+  name.first = fullName.substr(0, fullName.indexOf(' '))
+  name.last = fullName.substr(fullName.indexOf(' ') + 1)
+  return name
 }
 
 module.exports = { registerProfile, getProfile, updateProfile, deleteProfile }
