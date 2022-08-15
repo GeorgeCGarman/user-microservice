@@ -2,7 +2,11 @@ const Complaint = require("../models/complaintModel")
 
 const createComplaint = async(req, res) => {
   try{
-    const complaint = new Complaint(req.body)
+    console.log(req.query);
+    const complaint = new Complaint({
+      user_id: req.query.user_id,
+      ...req.body
+    })
     await complaint.save()
     res.status(201).json({status:"success", msg: "Successfully created new complaint"})
   } catch (e) {
@@ -15,8 +19,8 @@ const createComplaint = async(req, res) => {
 }
 
 const getComplaint = async(req, res) => {
-  try{
-    const complaint = await Complaint.findOne({_id: req.body._id})
+  try {
+    const complaint = req.query.complaint_id ? await Complaint.findOne({_id: req.query.complaint_id}) : await Complaint.find({user_id: req.query.user_id})
     if (!complaint) return res.status(404).json({status: "fail", msg: "Complaint not found"})
     return res.status(200).json(complaint)
   } catch (e) {
