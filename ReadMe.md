@@ -1,4 +1,6 @@
-# API for Profiles
+# scicom-user-microservice
+
+This is an API for user profiles. Users can also raise complaints about the service and give ratings to other users.
 
 ### Start server
 
