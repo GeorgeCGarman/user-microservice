@@ -2,6 +2,7 @@ const Profile = require("../models/profileModel")
 
 const registerProfile = async (req, res) => {
   try {
+    console.log("req.body :>> ", req.body)
     const duplicate = await Profile.findOne({
       name: fullNameToName(req.body.name),
     }) // *
@@ -12,12 +13,15 @@ const registerProfile = async (req, res) => {
         .status(400)
         .json({ status: "fail", msg: "Profile already exists" })
     const { birthday, role } = req.body
+    name = fullNameToName(req.body.name)
+    console.log("name :>> ", name)
+
     const profile = new Profile({
+      name,
       birthday,
       role,
       mode: true,
     })
-    profile.name = name
     await profile.save()
     res
       .status(201)

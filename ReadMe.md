@@ -22,6 +22,9 @@ An API for user profiles.
 
 `Post /onboarding/profile`
 
+As you can see, the new profile is added to the database:
+![Alt text](/screenshots/createProfile.png)
+
 ### Get profile
 
 `GET /onboarding/profile`
@@ -70,6 +73,8 @@ Ratings are for users to give other users ratings. Each rating document consists
 ### Create rating
 
 `POST /ratings`
+
+![Alt text](/screenshots/getRating.png)
 
 ### Get rating
 
